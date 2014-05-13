@@ -1,0 +1,68 @@
+{block head}
+    <link rel="stylesheet" href="{$basePath}/css/projects.css" type="text/css"/>
+    <meta name="robots" content="noindex, nofollow">
+{/block}
+{block javaScripts}
+    <script type="text/javascript" src="{$basePath}/js/sliders.js"></script>
+{/block}
+{block #title}Projekty{/block}
+{block content}
+    {control searchProjects}
+    <div class="grid_12 myPaging">
+        {control vP}
+    </div>
+    <!-- end of pagingWrap -->
+    <div class="projectsOverView grid_12">
+        {if !empty($projects)}
+            <div class="headline grid_12 alpha omega">
+                <div class="grid_3 alpha">Název</div>
+                <div class="grid_2">Uchazeči</div>
+                <div class="grid_3">Kategorie</div>
+                <div class="grid_2">Odměna</div>
+                <div class="grid_2 omega">Deadline</div>
+            </div>
+            <div class="projects grid_12 alpha omega">
+                {foreach $projects as $project}
+                    <a n:href="Project:detail, $project->id, $project->name" title="{$project->name}"
+                       class="grid_12 alpha omega">
+                        <div n:class="$project->isOwner($oUser) ? 'mine project grid_12 alpha omega' : 'project grid_12 alpha omega'">
+                            <div class="name grid_3 alpha">
+                                <h2>
+                                    {$project->name}
+                                </h2>
+                            </div>
+                            <div class="attendees grid_2">
+                                {$project->getAttendees(true)}
+                            </div>
+                            <div class="category grid_3">
+                                {var $categories = $project->getCategories()}
+                                {if !empty($categories)}
+                                    {foreach $categories as  $category}
+                                        {$category}
+                                        {sep}<br/>{/sep}
+                                    {/foreach}
+                                {/if}
+                                &nbsp;
+                            </div>
+
+                            <div class="reward grid_2">
+                                {$project->reward} Kč <br/>{$project->pricing|decodeEnum}
+                            </div>
+
+                            <div class="deadline grid_2 omega">
+                                {$project->deadline|czechDate}
+                            </div>
+                        </div>
+                    </a>
+                {/foreach}
+            </div>
+        {else}
+            <div class="grid_12 noProjects alpha omega pull-center">Nebyl nalezen žádný projekt</div>
+        {/if}
+    </div>
+    <!-- end of contractsOverView -->
+    <div class="grid_12 myPaging">
+        {control vP}
+    </div>
+    <!-- end of pagingWrap -->
+{/block}

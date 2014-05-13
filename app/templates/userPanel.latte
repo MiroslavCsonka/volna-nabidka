@@ -1,0 +1,40 @@
+<div id="userPanelWrapper" class="grid_12">
+    <div id="userPanel" class="default grid_12 alpha omega">
+        <ul class="nav nav-pills grid_9 alpha omega">
+            <li>
+                <a n:href="User: $user->getId(), $user->identity->name">
+                    <i class="icon-user"></i> Profil
+                </a>
+            </li>
+            <li>
+                <a n:href="Messages:">
+                    <i class="icon-envelope"></i> Zprávy
+                </a>
+            </li>
+            <li>
+                <a n:href="Projects:mine">
+                    <i class="icon-tasks"></i> Mé projekty
+                </a>
+            </li>
+            <li>
+                <a n:href="Settings:">
+                    <i class="icon-wrench"></i> Nastavení
+                </a>
+            </li>
+            <li>
+                <a n:href="Notifications:">
+                    {if $numOfNotifications != 0}
+                        <span class="badge badge-warning">{$numOfNotifications}</span>
+                    {/if}
+                    <span style="position: relative; top: 2px;">Notifikace</span>
+                </a>
+            </li>
+            <li n:if="$user->isAllowed('backend','see')">
+                <a n:href="Administration:">
+                    <i class="icon-globe"></i>
+                    Administrace
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

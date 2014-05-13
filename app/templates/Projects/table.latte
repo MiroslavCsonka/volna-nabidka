@@ -1,0 +1,46 @@
+<h1>
+    {$headLine} - <span class="muted">({count($projects)})</span>
+</h1>
+{if count($projects) > 0}
+    <table class="table table-bordered" style="margin-top: 10px;">
+        <thead>
+        <tr>
+            <th style="width: 25%;">Jméno projektu</th>
+            <th style="width: 25%;">Počet uchazečů</th>
+            <th style="width: 25%;">Datum dokončení</th>
+            <th style="width: 25%;">Odměna</th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach $projects as $project}
+            <tr>
+                <td>
+                    <a n:href="Project:detail $project->id, $project->name">
+                        {$project->name}
+                    </a>
+                </td>
+                <td>
+                    <a n:href="Project:detail $project->id, $project->name">
+                        {$project->getAttendees(true)}
+                    </a>
+                </td>
+                <td>
+                    <a n:class="$project->deadline < date('Y-m-d') ? 'red'"
+                       n:href="Project:detail $project->id, $project->name">
+                        {$project->deadline|czechDate}
+                    </a>
+                </td>
+                <td>
+                    <a n:href="Project:detail $project->id, $project->name">
+                        {$project->reward}kč/{$project->pricing|decodeEnum}
+                    </a>
+                </td>
+            </tr>
+        {/foreach}
+        </tbody>
+    </table>
+{else}
+    <div class="noProjects">
+        Nenalezeny žádné projekty
+    </div>
+{/if}

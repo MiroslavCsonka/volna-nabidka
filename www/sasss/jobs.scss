@@ -1,0 +1,149 @@
+@import "default.scss";
+
+@mixin blueBackground {
+  background: lightskyblue;
+  background-image: -webkit-linear-gradient(bottom, #1890C0 25%, #26A2C8 50%, #36B9D7 75%);
+  background-image: -moz-linear-gradient(bottom, #1890C0 25%, #26A2C8 50%, #36B9D7 75%);
+  background-image: -o-linear-gradient(bottom, #1890C0 25%, #26A2C8 50%, #36B9D7 75%);
+  background-image: -ms-linear-gradient(bottom, #1890C0 25%, #26A2C8 50%, #36B9D7 75%);
+  background-image: linear-gradient(bottom, #1890C0 25%, #26A2C8 50%, #36B9D7 75%);
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.25, #1890C0), color-stop(0 #26A2C8), color-stop(0.75, #36B9D7));
+}
+
+.searchBoxWrap {
+  background: $grey;
+  border-radius: 6px;
+  padding: 20px 0;
+  margin-bottom: 10px;
+}
+
+.searchForm {
+  margin: 15px 0;
+  form {
+	padding-left: 10px;
+  }
+}
+
+.advancedSearchButton {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.sortDates {
+  margin: 15px 0;
+  form {
+	padding-left: 10px;
+  }
+}
+
+.sortReward {
+  margin: 15px 0;
+  form {
+	padding-right: 10px;
+  }
+}
+
+.sortCategories {
+  margin: 15px 0;
+}
+
+.categoryWrapper {
+  margin: 10px 0;
+  display: inline-block;
+}
+
+.mainCategory {
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+.subCategory {
+  margin: 5px 0px 0px 30px;
+}
+
+.categorySelectBox form {
+  padding-left: 10px;
+}
+
+.selectedCategories {
+  ul {
+	li {
+	  margin: 5px 0 0 30px;
+	}
+  }
+  > * {
+	padding-right: 10px;
+  }
+}
+
+/*
+Paging
+*/
+
+.myPaging div {
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+/*
+=CONTRACT TABLE
+*/
+/*
+=THEAD
+*/
+.contractsOverView {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  table {
+	border: 1px solid #F2F2F2;
+	width: 940px;
+	tr {
+	  th {
+		color: white;
+		background: #0084C1;
+		height: 40px;
+		line-height: 40px;
+		text-align: center;
+	  }
+	}
+  }
+}
+
+.contractName {
+  width: 25%;
+}
+
+.contractAttenders {
+  width: 10%;
+}
+
+.contractCategories {
+  width: 25%;
+}
+
+.contractReward {
+  width: 20%;
+}
+
+.contractStart {
+  width: 10%;
+}
+
+.contractEnd {
+  width: 10%;
+}
+
+/*
+=TBODY
+*/
+.contractsOverView tbody tr {
+  td {
+	padding: 20px 0;
+	text-align: center;
+	word-wrap: break-word;
+  }
+  &::nth-child(even) {
+	background: #FAFAFA;
+  }
+}

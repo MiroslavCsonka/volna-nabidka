@@ -1,0 +1,73 @@
+{block head}
+    <link rel="stylesheet" href="{$basePath}/css/project.css" type="text/css"/>
+    <meta name="robots" content="noindex, nofollow">
+    <script>
+        $(function () {
+            $("#tabs").tabs();
+            $("#datepicker").datepicker({
+               dateFormat: "dd-mm-yy",
+               dayNamesMin: [ "Po", "Út", "St", "Čt", "Pá", "So", "Ne" ],
+               monthNames: [ "Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec" ],
+               minDate: new Date()
+            });
+        });
+    </script>
+{* TINYMCE *}
+    <script type="text/javascript" src="{$basePath}/components/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+    <script type="text/javascript">
+        tinyMCE.init({
+                mode:"textareas",
+                theme:"simple"
+        });
+    </script>
+{/block}
+{block title}Upravit Projekt - {$project->name}{/block}
+{block content}
+    <div class="grid_12">
+        <div id="tabs" class="clearfix">
+            <ul>
+                <li><a href="#tabs-3">Základní informace</a></li>
+            </ul>
+            <div id="tabs-3" class="postProject">
+                {form modify}
+                    <table>
+                        <tr>
+                            <td>{label name, class => projectNameInput/}</td>
+                            <td>{input name, placeholder => "Zadejte jméno projektu", class => 'input'}</td>
+                        </tr>
+                        <tr>
+                            <td>{label categories/}</td>
+                            <td>{input categories, class => 'chosen input' }</td>
+                        </tr>
+                        <tr>
+                            <td>{label location/}</td>
+                            <td>{input location, class => 'chosen input' }</td>
+                        </tr>
+                        <tr>
+                            <td>{label scale/}</td>
+                            <td>{input scale, class => 'chosen input'}</td>
+                        </tr>
+                        <tr>
+                            <td>{label pricing/}</td>
+                            <td>{input pricing, class => 'chosen rewardTypeInput input'}</td>
+                        </tr>
+                        <tr>
+                            <td>{label reward/}</td>
+                            <td>{input reward, placeholder => "Zadejte odměnu v KČ", class => 'input'}</td>
+                        <tr>
+                            <td>{label description/}</td>
+                            <td>{input description , class => 'input'}</td>
+                        </tr>
+                        <tr>
+                            <td>{label deadline/}</td>
+                            <td>{input deadline, id => 'datepicker'}</td>
+                        </tr>
+                        <tr>
+                            <td>{input submitAddProject, class => 'btn btn-success', value => 'Aktualizovat'}</td>
+                        </tr>
+                    </table>
+                {/form}
+            </div>
+        </div>
+    </div>
+{/block}

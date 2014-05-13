@@ -1,0 +1,255 @@
+{block head}
+    <link rel="stylesheet" href="{$basePath}/css/user.css" type="text/css"/>
+    <meta name="robots" content="index, follow">
+{/block}
+{block #title}Uživatel {$currentUser->name}{/block}
+{block content}
+    <div class="grid_12">
+    <div id="employeeWrapper">
+    <div class="profilePicture grid_3 alpha">
+        <img src="{$id|picture:"user"}" alt="Avatar"/>
+    </div>
+    <!-- end of profilePicture -->
+    <div class="userInfo grid_9 omega">
+        <div class="userName grid_4 alpha">
+            {$currentUser->name}
+        </div>
+        <!-- end of userName -->
+        <div class="contactMe grid_5 omega">
+            {if $oUser instanceof \Entity\User && $oUser->id !== $currentUser->id}
+                <a href="#myModal" role="button" class="btn" title="Pošlete mi zprávu" data-toggle="modal">
+                    Soukromá zpráva
+                </a>
+                <a href="#hireMe" role="button" class="btn" title="Zaměstnejte mě" data-toggle="modal">
+                    Zaměstnejte mě
+                </a>
+            {else}
+                &nbsp;
+            {/if}
+        </div>
+        <!-- end of contactMe -->
+        <div class="categories grid_4 alpha">
+            <fieldset>
+                <legend>Kategorie:</legend>
+                {foreach $currentUser->getCategories() as $id => $category}
+                    <span><a n:href="Projects:default, $id">{$category}</a></span>
+                    {sep}<br/>{/sep}
+                {/foreach}
+            </fieldset>
+        </div>
+        <!-- end of categories -->
+        <div class="lvlBar grid_4 suffix_1 omega">
+            {var $userLevel = floor($currentUser->getLevel())}         
+            {var $myLevelExpNeeded = \Level::getExpByLevel($userLevel)}
+            Level: {$userLevel}<br/>
+            {var $nextLevel  = \Level::getExpByLevel($userLevel + 1)}
+            {var $expNeeded = $nextLevel - $currentUser->getExp()}
+            {var $percentage = ($currentUser->getExp())/($nextLevel/100)}
+            Do dalšího levelu zbývá <span class="badge badge-success">{$expNeeded}</span> zkušeností<br/>
+
+            <div class="progress progress-striped active">
+                <div class="bar bar-warning" style="width: {round($percentage)}%;"></div>
+            </div>
+            {if strlen($currentUser->aboutMe) > 1}
+                <div class="aboutMe grid_4 alpha omega">
+                    <strong>O mně:</strong><br/>
+
+                    <p>
+                        {$currentUser->aboutMe}
+                    </p>
+                </div>
+            {/if}
+        </div>
+        <!-- end of lvlBar -->
+    </div>
+    <!-- end of userInfo -->
+    <div class="cv grid_12 alpha omega">
+        <h2>Životopis:</h2>
+        <section class="grid_12 alpha omega">
+            <div class="firstLineWrapper grid_12 alpha omega">
+                <div class="contacts grid_4 alpha">
+                    <strong>Kontakty:</strong>
+
+                    <div class="contactsWrap">
+                        {if strlen($currentUser->icq) > 1}
+                            <strong class="icq"></strong>
+                            <span>{$currentUser->icq}</span>
+                            <br/>
+                        {/if}
+                        {if strlen($currentUser->skype) > 0}
+                            <strong class="skype"></strong>
+                            <span>{$currentUser->skype}</span>
+                            <br/>
+                        {/if}
+                        {if strlen($currentUser->telephone) > 1}
+                            <strong class="telephone"></strong>
+                            <span>{$currentUser->telephone}</span>
+                            <br/>
+                        {/if}
+                        <strong class="mail"></strong>
+                        <span>{$currentUser->mail}</span><br/>
+                        {if strlen($currentUser->fbuid) > 1}
+                            <strong class="faceBook"></strong>
+                            <span><a target="_blank"
+                                     href="http://www.facebook.com/profile.php?id={$currentUser->fbuid}">{$currentUser->name}</a></span>
+                            <br/>
+                        {/if}
+                        {if !is_null($city)}
+                            <strong>Bydliště:</strong>
+                            <span>{$city->name}</span>
+                            <br/>
+                        {/if}
+                    </div>
+                </div>
+                <!-- end of contacts -->
+                <div class="languages prefix_1 grid_4 suffix_3 omega">
+                    {var $languages = $currentUser->getLanguages()}
+                    {if count($languages) > 0}
+                        <strong>Jazyky:</strong>
+                        <div class="languagesWrap">
+                            {foreach $languages as $language}
+                                <strong>
+                                    {$language->Language['name']}
+                                </strong>
+                                <span>
+                           {Data::getLevel($language['level'])}
+                     </span>
+                                <br/>
+                            {/foreach}
+                        </div>
+                    {/if}
+                </div>
+                <!-- end of languages -->
+            </div>
+            <!-- end of firstLineWrapper -->
+            <div class="secondLineWrapper grid_12 alpha omega">
+                <div class="oldProjects grid_5 alpha">
+                    <strong class="grid_5 alpha omega">Pracovní zkušenosti:</strong>
+
+                    <div class="tableHeadline grid_5 alpha omega">
+                        <span class="grid_2 alpha">Název zaměstnání:</span><span
+                                class="grid_3 omega">Popisek:</span>
+                    </div>
+                    <div n:inner-foreach="$currentUser->getOldProject() as $oldProject"
+                         class="oldProjectsWrap grid_5 alpha omega">
+                        <strong class="grid_2 alpha">{$oldProject->forWho}</strong>
+                        <span class="grid_3 omega">{$oldProject->description}</span>
+                    </div>
+                </div>
+                <!-- end of oldProjects -->
+                <div class="education grid_7 omega">
+                    <strong class="grid_7 alpha omega">Vzdělání:</strong>
+                    {*Headlines*}
+                    <div class="tableHeadline grid_7 alpha omega">
+                        <span class="grid_3 alpha">Jméno školy:</span><span class="grid_2">Zaměření:</span><span
+                                class="grid_2 omega">Rok ukončení:</span>
+                    </div>
+                    <div n:inner-foreach="$currentUser->getSchools() as $school"
+                         class="educationWrap grid_7 alpha omega">
+                        <strong class="grid_3 alpha">{$school->name}</strong>
+                        <span class="grid_2">{$school->focus}</span>
+                        <span class="grid_2 omega">{$school->end}</span>
+                    </div>
+                </div>
+                <!-- end of education -->
+            </div>
+            <!-- end of secondLineWrapper -->
+        </section>
+    </div>
+    <!-- end of about -->
+    <div class="statistics grid_4 alpha">
+        <h3>Statistiky:</h3>
+        {var $finishedProjects = $currentUser->getFinishedProjects(TRUE)}
+        <div class="statistic clearfix">
+            <span class="headline">Spokojenost:</span>
+            {if $finishedProjects > 0}
+                {var $happiness = $currentUser->getRating() * 20}
+                <span n:class="($happiness >= 80) ? 'green', ($happiness > 50 && $happiness < 80) ? 'orange', ($happiness <= 50) ? 'redBox'">{round($happiness)}%</span>
+            {else}
+                <span class="white">0%</span>
+            {/if}
+        </div>
+        <div class="statistic clearfix">
+            <span class="headline">Počet dokončených projektů:</span>
+            <span n:class="$finishedProjects > 0 ? 'green' : 'white'">{$finishedProjects}</span>
+        </div>
+        <div class="statistic clearfix">
+            <span class="headline">Počet založených projektů:</span>
+            {var $numOfMine = count($currentUser->getMineProjects())}
+            <span n:class="$numOfMine > 0 ? 'green' : 'white'">{$numOfMine}</span>
+        </div>
+        <div class="statisti clearfix">
+            <span class="headline">Průměrné hodnocení:</span>
+            {if $finishedProjects > 0}
+                {var $avgRating = $currentUser->getRating()}
+                <span n:class="($avgRating >= 4) ? 'green', ($avgRating > 2.5 && $avgRating < 4) ? 'orange', ($avgRating <= 2.5) ? 'redBox'">{round($avgRating, 1)}</span>
+            {else}
+                <span class="white">0</span>
+            {/if}
+        </div>
+    </div>
+    <!-- end of statistics -->
+    <div class="recent grid_8 omega">
+        <h3>Nedávné projekty:</h3>
+
+        <div n:foreach="$recentProjects as $recentProject" class="recentProject">
+            <a n:href="Project:detail, $recentProject->id, $recentProject->name"
+               title="{$recentProject->name}">{$recentProject->name}</a>
+        </div>
+    </div>
+    <!-- end of recent -->
+    <div class="references grid_12 alpha omega">
+        <h3>Reference:</h3>
+
+        <div n:foreach="$references as $reference" class="reference clearfix">
+            {var $referenceOwner = $reference->getProjectOwner()}
+            <div class="who">
+                {if $user->isAllowed('reference','remove')}
+                    <a href="{link removeReference! $reference->id}"
+                       onclick="return confirm('Opravdu chcete odebrat referenci?')">
+                        <i class="icon-remove"></i>
+                    </a>
+                {/if}
+                <a n:href="User:default, $referenceOwner->id, $referenceOwner->name"
+                   title="{$referenceOwner->name}">
+                    {$referenceOwner->name}
+                </a>
+            </div>
+            {var $project = $reference->getProject()}
+            <div class="projectName">
+                <h4>
+                    Projekt:
+                    <a n:href="Project:detail, $project->id, $project->name">{$project->name}</a>
+                </h4>
+            </div>
+            <div class="rating grid_3 omega">
+                Hodnocení: <span>{$reference->rating}</span>
+
+                <div class="starsWrapper">
+                    <div class="stars" style="width: {$reference->rating * 20}%;">&nbsp;</div>
+                    <!-- nbsp must have -->
+                </div>
+            </div>
+            <div class="miniProfilePic">
+                <img src="{$referenceOwner->id|picture, 'user'}" alt="{$referenceOwner->name}"/>
+            </div>
+            <div class="comment">
+                <p>
+                    "{$reference->review}"
+                </p>
+            </div>
+        </div>
+        <!-- end of reference -->
+    </div>
+    <!-- end of references -->
+    <div class="grid_12 pull-center">
+        {control vP}
+    </div>
+    </div>
+    <!-- end of employeeWrapper -->
+    </div>
+    {if $oUser instanceof \Entity\User && $oUser->id !== $currentUser->id}
+        {include 'sendMeMessage.latte'}
+        {include 'hireMe.latte'}
+    {/if}
+{/block}

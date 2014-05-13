@@ -1,0 +1,88 @@
+<div class="accordion-group">
+    <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" href="#collapse3">
+            Reference
+            {if $oldProjects->count() > 0}
+                - máte přidány
+                <span class="label label-success">{$oldProjects->count() }</span>
+            {else}
+                - nemáte přidanou žádnou referenci !
+            {/if}
+            <span class="pull-right">
+				{if $oldProjects->count() > 0}
+                    <span class="label label-success">20 / 20</span>
+
+
+					{else}
+
+
+                    <span class="label label-important"> 0 / 20</span>
+                {/if}
+			</span>
+        </a>
+    </div>
+    <div id="collapse3" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <div class="grid_3">
+                <a href="#addOldProjectReference" role="button" class="btn btn-success" data-toggle="modal">
+                    Přidat předešlý projekt
+                </a>
+            </div>
+            <div class="grid_8">
+                {if $oldProjects->count() > 0}
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Zaměstavatel</th>
+                            <th>Popisek</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $oldProjects as $oldReference}
+                            <tr>
+                                <td>{$oldReference['forWho']}</td>
+                                <td>{$oldReference['description']}</td>
+                                <td>
+                                    <a n:href="deleteOldReference! $oldReference['id']" class="close">
+                                        &times;
+                                    </a>
+                                </td>
+                            </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                {/if}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addOldProjectReference" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Přidání reference</h3>
+    </div>
+    {form addOldProjectReference}
+        <div class="modal-body">
+            <table>
+                <tr>
+                    <th>{label forWho/}</th>
+                    <td>
+                        <input n:input="forWho"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>{label description/}</th>
+                    <td>
+                        {input description}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">zavřít</button>
+            <input n:input="addEducationSubmit" class="btn btn-success" value="Přidat">
+        </div>
+    {/form}
+</div>

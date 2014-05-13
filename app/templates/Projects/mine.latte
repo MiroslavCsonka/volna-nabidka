@@ -1,0 +1,44 @@
+{block head}
+    <link rel="stylesheet" href="{$basePath}/css/projects.css" type="text/css"/>
+    <meta name="robots" content="noindex, nofollow">
+{/block}
+
+{block #title}Přehled mých projektů{/block}
+
+{block content}
+    <div class="grid_12">
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#mineProjects" data-toggle="tab">Mé projekty</a>
+                </li>
+                <li>
+                    <a href="#others" data-toggle="tab">Projekty kde se účastním</a>
+                </li>
+            </ul>
+            <!-- end of nav nav-tabs -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="mineProjects">
+                    {include 'table.latte','headLine' => 'Mnou vytvořené','projects' => $mineLive}
+                    <hr>
+                    {include 'tableWithoutAttendees.latte','headLine' => 'Rozpracované','projects' => $mineLocked}
+                    <hr>
+                    {include 'tableWithoutAttendees.latte','headLine' => 'Dokončené','projects' => $mineFinished}
+                </div>
+                <!-- end of tab-pane active -->
+                <div class="tab-pane" id="others">
+                    {include 'table.latte','headLine' => 'Čekám na schválení','projects' => $relatedAttending}
+                    <hr>
+                    {include 'tableWithoutAttendees.latte','headLine' => 'Rozpracované','projects' => $relatedWorkingOn}
+                    <hr>
+                    {include 'tableWithoutAttendees.latte','headLine' => 'Dokončené','projects' => $relatedFinished}
+                </div>
+                <!-- end of tab-pane -->
+            </div>
+            <!-- end of tab-content -->
+        </div>
+        <!-- end of tabbable -->
+    </div>
+    <!-- end of grid_12 -->
+
+{/block}

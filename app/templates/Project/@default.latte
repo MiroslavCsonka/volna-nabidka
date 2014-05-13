@@ -1,0 +1,138 @@
+{extends "../@layout.latte"}
+{block head}
+    <link rel="stylesheet" href="{$basePath}/css/project.css" type="text/css"/>
+    <meta name="robots" content="index, follow">
+{/block}
+{block title}Projekt - {$project->name} | Volná Nabídka{/block}
+{block content}
+    {block infoMessage}{/block}
+    <div class="grid_9 projectName">
+        <h2>
+            {if $user->isAllowed('project','remove')}
+                <a href="{link removeProject! $project->id}"
+                   onclick="return confirm('Opravdu chcete odebrat projekt?')">
+                    <i class="icon-remove"></i>
+                </a>
+            {/if}
+            {$project->name}
+        </h2>
+    </div>
+    <div class="grid_3 signInButton">
+        {block button}{/block}{* sem se dosadí button (přihlásit se, odhlásit se, upravit, dokončit...) *}
+    </div>
+    <!-- end of signInButton -->
+    <div class="grid_9 projectDescription">
+        <div class="info">
+            <div class="infoHeadline">
+                Informace o projektu:
+            </div>
+            <div class="infoText clearfix">
+                <p>
+                    {!$project->description|purify}
+                </p>
+            </div>
+            <!-- end of infoText -->
+            {if $project->location !== NULL}
+                <div class="infoHeadline">
+                    Lokace:
+                </div>
+                <div class="location">
+                    {$projectLocation->name}
+                </div>
+            {/if}
+        </div>
+        <!-- end of info -->
+        <div class="categoriesNeeded">
+            <div class="categoriesNeededHeadline">Potřebné dovednosti:</div>
+            <div class="categoriesList">
+                {var $categories = $project->getCategories()}
+                <ul>
+                    {foreach $categories as $id => $category}
+                        <li><a n:href="Projects:default, $id">{$category}</a></li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+        <!-- end of categoriesNeeded -->
+    </div>
+    <!-- end of projectDescription -->
+    <div class="grid_3 staticInfo">
+        <div class="rewardTypeHeadline">Typ odměny:</div>
+        <div class="rewardType">
+            {$project->pricing|decodeEnum}
+        </div>
+        <div class="rewardHeadline">Odměna:</div>
+        <div class="reward">
+            {$project->reward} Kč
+        </div>
+        <div class="deadline">
+            {capture $end}
+                {$project->deadline|countRemaininig}
+            {/capture}
+            {if $end > 0}
+                <div class="deadlineHeadline">Končí za:</div>
+                <div class="ends">{$end|days}</div>
+            {else}
+                <div class="deadlineHeadline">Projekt již skončil!</div>
+            {/if}
+        </div>
+        <!-- end of deadline -->
+        <div class="scaleHeadline">Rozsah projektu:</div>
+        <div class="scale">
+            {var $scale = \Data::getScale()}
+            {$scale[$project->scale]}
+        </div>
+    </div>
+    <!-- end of staticInfo -->
+    {if $project->isOwner($oUser)}
+        {block attendees}{/block}     
+    {/if}
+    {block empl}{/block}
+    <div class="grid_12 discussion">
+        <div class="page-header">
+            <h3 class="bold">Diskuze:</h3>
+        </div>
+        {snippet messages}
+        {if count($comments) > 0}
+            <div n:foreach="$comments as $comment" class="message clearfix">
+                <div class="from grid_9 alpha">
+                    <a n:href="User: $comment->u_id, $comment->name" title="{$comment->name}">
+                        {$comment->name}
+                    </a>
+                </div>
+                <div class="time grid_3 omega">
+                    <div>
+                        Přidáno: <span class="bold">{$comment->date|date:'j. n. H:i'}</span>
+                    </div>
+                </div>
+                <div class="miniProfilePic">
+                    <img src="{$comment->u_id|picture:"user","mini"}" alt="{$comment->name}"/>
+                </div>
+                <div class="comment">
+                    {!$comment->value|escape|nl2br}
+                </div>
+            </div>
+            <!-- end of message -->
+        {else}
+            <div class="grid_12 noComments alpha omega">Ještě nikdo nepřispěl do diskuze</div>
+        {/if}
+        {/snippet}
+        <div class="sendMessageForm grid_12 alpha omega">
+            {if $user->isLoggedIn()}
+                {form addMessage}
+                {label message/}
+                {input message size => 30}
+                {input submitMessage class => "btn btn-success"}
+                {/form}
+            {else}
+                <div class="pull-center loginForAdd">
+                    <a data-toggle="modal" data-target="#loginModal" class="btn btn-warning" href="#">
+                        Přihlašte se, pokud chcete přidávat komentáře
+                    </a>
+                </div>
+            {/if}
+        </div>
+        <!-- end of sendMessageForm -->
+    </div>
+    <!-- end of messagesWrapper -->
+{/block}

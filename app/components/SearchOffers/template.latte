@@ -1,0 +1,63 @@
+{block content}
+    <div class="searchBoxWrap grid_12">
+        {form projectSearch}
+            <div id="shortSearch" class="grid_12 alpha omega">
+                <div class="searchForm grid_6 alpha">
+                    {label name, class=>'grid_2 aplha', style => "position: relative; top: 4px;"/}
+                    {input name, autocomplete => 'off'}
+                </div>
+                <!-- end of searchForm -->
+                <div class="sortReward grid_6 omega">          
+                    {input type}
+                    <div id="perProject">
+                        <div class="slider"
+                             data-min="{$perProjectWage['min']}"
+                             data-max="{$perProjectWage['max']}"
+                             data-defaultmin="{$defaultPerProjectWage['min']}"
+                             data-defaultmax="{$defaultPerProjectWage['max']}"
+                                ></div>
+                        <span>
+                           <span class="amount">{$defaultPerProjectWage['min']} - {$defaultPerProjectWage['max']}</span>
+                           Kč/projekt
+                        </span>
+                    </div>
+
+                    <div id="perHour">
+                        <div class="slider"
+                             data-min="{$perHourWage['min']}"
+                             data-max="{$perHourWage['max']}"
+                             data-defaultmin="{$defaultPerHourWage['min']}"
+                             data-defaultmax="{$defaultPerHourWage['max']}"
+                                ></div>
+                        <span>
+                           <span class="amount">{$defaultPerHourWage['min']} - {$defaultPerHourWage['max']}</span>
+                           Kč/h
+                        </span>
+                    </div>
+                    {input min, id => 'min'}
+                    {input max, id => 'max'}
+                </div>
+                <!-- end of sortReward -->
+            </div>
+            <!-- end of short search -->
+            <div id="longSearch" class="grid_12 alpha omega">
+                <div class="pickCategories grid_5 alpha">
+                    <span class="balanceToSelect grid_2 aplha">Vyberte kategorii</span>
+                    {input categories, class => 'chosen grid_3 omega'}
+                </div>
+                <!-- end of pickCategories -->
+                <div class="pickCities grid_7 omega">
+                    <span class="balanceToSelect">Vyberte lokaci</span>
+                    {input cities, class => 'chosen', data-placeholder => 'Vyberte lokaci'}
+                </div>
+                <!-- end of pickCities -->
+            </div>
+            <!-- end of long search -->
+            <div class="advancedSearchButton grid_12 alpha omega">
+                {input submit, class => 'btn btn-info btn-large' }
+            </div>
+            <!-- end of advancedSearchButton -->
+        {/form}
+    </div>
+    <!-- end of searchBoxWrap -->
+{/block}

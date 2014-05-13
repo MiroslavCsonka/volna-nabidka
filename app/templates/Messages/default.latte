@@ -1,0 +1,98 @@
+{block head}
+    <link rel="stylesheet" href="{$basePath}/css/messages.css" type="text/css"/>
+    <meta name="robots" content="noindex, nofollow">
+{/block}
+{block title}První stránka{/block}
+{block content}
+    <div class="grid_12">
+        <div class="tabbable tabs-left grid_12 alpha omega">
+            <ul id="navWithRightmargin" class="nav nav-tabs grid_2 alpha">
+                <li class="active">
+                    <a href="#tab1" data-toggle="tab">
+                        Přijaté
+                        {var $unread = 0}
+                        {foreach $messages as $message}
+                            {if $message['read'] === false}
+                                {var $unread++}
+                            {/if}
+                        {/foreach}
+                        {if $unread > 0}
+                            <span class="badge badge-success">{$unread}</span>
+                        {/if}
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab3" data-toggle="tab">
+                        Nová zpráva
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content grid_10 omega">
+                <div class="tab-pane active" id="tab1">
+                    <table class="table table-striped messages">
+                        {if count($messages) > 0}
+                            <tr>
+                                <th>
+                                    S kým si píšete:
+                                </th>
+                                <th>
+                                    Poslední zpráva:
+                                </th>
+                                <th>
+                                    Datum:
+                                </th>
+                            </tr>
+                            {foreach $messages as $message}
+                                {var $lastMessage = $message['lastMessage']}
+                                <tr>
+                                    <td style="width: 30%;">
+                                        {foreach $message['users'] as $user}
+                                            {if $user->id !== $oUser->id}
+                                                <a href="{link User: $user->id,$user->name}">
+                                                    {$user->name}
+                                                </a>
+                                                {sep},{/sep}
+                                            {/if}
+                                        {/foreach}
+                                    </td>
+                                    <td style="width: 50%;">
+                                        <a href="{link Messages:detail $lastMessage->thread_id}">
+                                            <div>
+                                                {$lastMessage['lastRead_id']}-{$lastMessage['last_id']}
+                                                {if $message['read'] === false}
+                                                    <span class="label label-success">nová</span>
+                                                {/if}
+                                                *{$lastMessage->name}*:
+                                                {$lastMessage->content|truncate:30}
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td style="width: 20%;">
+                                        <a href="{link Messages:detail $lastMessage->thread_id}"
+                                           title=" {$lastMessage->date|czechDateTime}">
+                                            <div>
+                                                {$lastMessage->date|timeAgoInWords}
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {/foreach}
+                        {else}
+                            <tr>
+                                <td id="noMessages">Nemáte žádnou započatou konverzaci</td>
+                            </tr>
+                        {/if}
+                    </table>
+                </div>
+                <!-- end of message wrapper -->
+                <div class="tab-pane" id="tab3">
+                    {control messageForm}
+                </div>
+                <!-- end of new message -->
+            </div>
+            <!-- end of tab-content -->
+        </div>
+        <!-- end of tabbable tabs-left -->
+    </div>
+    <!-- end of messages -->
+{/block}

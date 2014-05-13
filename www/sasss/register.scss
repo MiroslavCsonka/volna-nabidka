@@ -1,0 +1,12 @@
+@import "default.scss";
+
+td input {
+  margin-top: 5px; /*Aby to vypadalo že je to krásně v jednom řádku*/
+}
+
+.registerHeadline {
+  font-weight: bold;
+  color: $blue;
+  font-size: 24px;
+  padding: 20px 0;
+}

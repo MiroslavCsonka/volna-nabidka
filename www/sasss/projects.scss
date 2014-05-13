@@ -1,0 +1,177 @@
+@import "default.scss";
+
+.searchBoxWrap {
+   background: lightskyblue;
+   border-radius: 6px;
+   padding: 20px 0;
+   margin-bottom: 10px;
+}
+
+#perProject{
+   margin-top: 10px;
+   width: 400px;
+}
+
+#perHour{
+   margin-top: 10px;
+   width: 400px;
+}
+
+.balanceToSelect {
+   position: relative;
+   top: -7px;
+}
+input[type="radio"] {
+   margin: 0 5px;
+} 
+#frmprojectSearch_categories_chzn{
+   position: relative;
+   top: -10px;
+}
+
+.pickCities{
+   position: relative; 
+   left: 60px;
+   top: -10px;
+}
+
+.searchForm form{
+   padding-left: 10px;
+}
+
+.advancedSearchButton {
+   text-align: center;
+   margin: 15px 0;
+}
+
+.advancedSearch {
+   margin: 15px 0;
+}
+
+.sortDates {
+   margin: 15px 0;
+   form {
+      padding-left: 10px;
+   }
+}
+
+.sortReward {
+   margin: 15px 0;
+   position: relative;
+   top: -15px;
+   form{
+      padding-right: 10px;
+   }
+   label{
+      position: relative;
+      margin-right: 10px;
+   }
+   input{
+   }
+}
+
+.sortCategories {
+   margin: 15px 0;
+}
+
+.categoryWrapper {
+   margin: 10px 0;
+   display: inline-block;
+   form {
+      padding-left: 10px;
+   }
+}
+
+.mainCategory {
+   font-weight: bold;
+   margin-left: 20px;
+}
+
+.subCategory {
+   margin: 5px 0px 0px 30px;
+}
+
+.selectedCategories ul li {
+   margin: 5px 0 0 30px;
+}
+
+.selectedCategories > * {
+   padding-right: 10px;
+}
+
+.removeCategory {
+   color: red;
+   background: none;
+   border: none;
+}
+
+/*
+=PAGING
+*/
+
+.myPaging div {
+   margin-top: 0;
+   margin-bottom: 0;
+   text-align: center;
+}
+
+/*
+=PROJECT TABLE
+*/
+.project:hover{
+   background: #e3e3e3;
+}
+
+.projectsOverView {
+   margin: 10px 10px;
+   border: 1px solid $grey;
+   .headline {
+      color: white;
+      background: #0084C1;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+   }
+   .projects {
+      a{
+         border-bottom: 1px solid $tableRowSep;
+         &:last-child{
+            border-bottom: none;
+         }
+         &:nth-child(odd){
+            background-color: $tableOddRow;
+         }
+         .project{
+            padding-top: 14px;
+            padding-bottom: 14px;
+            cursor: pointer;
+            .attendees, .reward, .deadline, .category {
+               text-align: center;
+            }
+         }  
+      }
+   }
+}
+
+.name {
+   box-sizing: border-box;
+   padding-left: 10px;
+   text-transform: capitalize;
+}
+
+.category {
+   text-transform: capitalize;
+}
+
+.ms-container ul.ms-list{
+   width: 200px;   
+}
+
+.noProjects{
+   padding: 15px 0;
+   color: $red;
+}
+
+.mine{
+   color: $red;
+}

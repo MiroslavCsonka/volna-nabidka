@@ -1,0 +1,20 @@
+<div class="accordion-group">
+    <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" href="#aboutMe">
+            Pár slov o mně
+        </a>
+    </div>
+    <div id="aboutMe" class="accordion-body collapse in">
+        <div class="accordion-inner">
+            {form aboutMeForm}
+                <table style="width: 100%;">
+                    <tr>
+                        <td>{label aboutMe/}</td>
+                        <td>{input aboutMe, style=>'width: 80%;'}</td>
+                        <td>{input submitButton}</td>
+                    </tr>
+                </table>
+            {/form}
+        </div>
+    </div>
+</div>

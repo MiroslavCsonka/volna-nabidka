@@ -1,0 +1,22 @@
+@import "default.scss";
+
+.postProject {
+   font: normal normal 400 16px/24px Arial;
+}
+
+#frm-addProject td {
+   padding: 3px 5px;
+}
+
+.input {
+   margin-top: 10px;
+}
+
+.red{
+   color: $red;
+}
+
+.info{
+   margin-top: 20px;
+   color: grey;
+}

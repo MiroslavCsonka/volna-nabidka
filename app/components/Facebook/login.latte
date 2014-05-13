@@ -1,0 +1,18 @@
+<a href="#" onclick="login()">
+    Facebook
+</a>
+<script>
+    function login()
+    {
+           FB.login(function (response) {
+               // console.log("connecting");
+               if (response.authResponse) {
+                   // console.log("connected");
+                   window.location = {link authenticate!};
+               } else {
+				// console.log("connection failed");
+			}
+    }, { scope:'email'})
+    ;
+    }
+</script>

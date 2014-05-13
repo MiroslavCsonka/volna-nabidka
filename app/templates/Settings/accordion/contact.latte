@@ -1,0 +1,45 @@
+<div class="accordion-group">
+    <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" href="#updateInformation">
+            Kontaktní údaje
+        </a>
+    </div>
+    <div id="updateInformation" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <div class="contentWrap">
+                {form updateContactInformation}
+                    <table class="updateInformation">
+                        <tr>
+                            <th>{label city/}</th>
+                            <td>
+                                {input city}
+                            </td>
+                            <th>{label icq/}</th>
+                            <td>
+                                <input n:input="icq">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{label skype/}</th>
+                            <td>
+                                <input n:input="skype">
+                            </td>
+                            <th>{label telephone/}</th>
+                            <td>
+                                <input n:input="telephone">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <input n:input="updateInformation" class="btn btn-success" value="Upravit">
+                            </td>
+                        </tr>
+                    </table>
+                {/form}
+            </div>
+            <!-- end of contentWrap -->
+        </div>
+        <!-- end of accordion-inner -->
+    </div>
+    <!-- end of updateInformation -->
+</div><!-- end of accordion-group -->

@@ -1,0 +1,56 @@
+common:
+	parameters:
+		database:
+			driver: mysql
+			host: wm21.wedos.net
+			database: d24950_db
+			user: w24950_db
+			password: cmFjn3q9
+			profiler: TRUE
+		facebook:
+			appId: 471260746250068
+			secret: "44a278ecb4d0970001157975769e6a96"
+		vampMode: FALSE
+		notAuthorized: "Na tuto akci nemáte oprávnění"
+		roles:
+			user: Uživatel
+			admin: Administrátor
+		userStates:
+			-1: Přístup odepřen
+			0: Neaktivován
+			1: Aktivní
+	php:
+		date.timezone: Europe/Prague
+		# session.save_path: "%tempDir%/sessions"
+		# zlib.output_compression: yes
+
+
+	nette:
+		session:
+			expiration: '+ 14 days'
+		database:
+			default:
+				dsn: '%database.driver%:host=%database.host%;dbname=%database.database%'
+				user: %database.user%
+				password: %database.password%
+
+
+	services:
+		database: @Nette\Database\Connection
+		authenticator: Authenticator(@database)
+		authorizator: ACL
+		projectMapper: Mapper\Project(@database)
+		threadMapper: Mapper\Thread(@database)
+		cityMapper: Mapper\City(@database)
+		notificationMapper: Mapper\Notification(@database)
+		userMapper: Mapper\User(@database)
+		referenceMapper: Mapper\Reference(@database)
+		HTMLPurifier: HTMLPurifier(HTMLPurifier_Config::createDefault())
+		data: Data(@database)
+
+	factories:
+
+
+production < common:
+
+development < common:

@@ -1,0 +1,91 @@
+{block head}
+    <link href="{$basePath}/css/users.css" type="text/css" rel="stylesheet"/>
+    <meta name="robots" content="noindex, follow">
+    <!-- jQuery Stars -->
+    <link rel="stylesheet" href="{$basePath}/components/stars/jquery.rating.css" type="text/css"/>
+    <script src="{$basePath}/components/stars/jquery.rating.pack.js"></script>
+{/block}
+{block #title}Uživatelé{/block}
+{block content}
+    <div class="criteria grid_3">
+        <div class="criteriaWrapper">
+            <aside>
+                {form searchUsers}
+                    <div class="nameFilter">
+                        {label name /}<br/>
+                        {input name}
+                    </div>
+                    <div class="categoriesSelect">
+                        {label categories/}<br/>
+                        {input categories, class => 'chosen'}
+                    </div>
+                    <div class="numberOfProjectsSelect">
+                        {label numProjects /}<br/>
+                        {input numProjects}
+                    </div>
+                {input submit, class => 'btn btn-warning'}
+                {/form}
+            </aside>
+        </div>
+    </div>
+    <!-- end of criteria -->
+    <div class="myPaging grid_9 pull-center">
+        {control vP}
+    </div>
+    <!-- end of pagingWrap -->
+    <div class="users grid_9">
+        {if count($users) > 0}
+            {foreach $users as $user}
+                {capture $cleanName}{$user->name|webalize}{/capture}
+                <a n:href="User: $user->id, $cleanName">
+                    <div class="user grid_9 alpha omega">
+                        <div class="profileThumb grid_2 alpha">
+                            <img src="{$user->id|picture:"user","thumbnail"}" alt="{$user->name}"/>
+                        </div>
+                        <div class="profileInfo grid_7 omega">
+                            <div class="nickName grid_4 alpha">
+                                <h2>
+                                    {$user->name}
+                                </h2>
+                            </div>
+                            <div class="grid_3 omega">
+                                Hodnocení: <span>{round($user->getRating(), 1)}</span>
+
+                                <div class="starsWrapper">
+                                    <div class="stars" style="width: {round($user->getRating(), 1) * 20}%;">&nbsp;</div>
+                                    <!-- nbsp must have -->
+                                </div>
+                            </div>
+                            <!-- end of stars -->
+                            <div class="categories grid_4 alpha">
+                                {foreach $user->getCategories() as $category}
+                                    {$category}{sep}<br/>{/sep}
+                                {/foreach}
+                                &nbsp;
+                            </div>
+                            {var $userLevel = floor($user->getLevel())}
+                            {var $myLevelExpNeeded = \Level::getExpByLevel($userLevel)}
+                            <div class="progressBarInfo grid_1">Level: {$userLevel}</div>
+                            {var $nextLevel  = \Level::getExpByLevel($userLevel + 1)}
+                            {var $percentage = ($user->getExp())/($nextLevel/100)}
+                            <div class="progressBar grid_2 omega">
+                                <div class="progress progress-striped active">
+                                    <div class="bar bar-warning" style="width: {round($percentage)}%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of profileInfo -->
+                    </div>
+                </a>
+                <!-- end of user -->
+            {/foreach}
+        {else}
+            Podle zadaného filtru nebyli nalezeni žádní uživatelé
+        {/if}
+    </div>
+    <!-- end of users -->
+    <div class="myPaging prefix_3 grid_9 pull-center">
+        {control vP}
+    </div>
+    <!-- end of pagingWrap -->
+{/block}

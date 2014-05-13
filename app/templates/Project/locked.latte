@@ -1,0 +1,32 @@
+{extends '@default.latte'}
+{block infoMessage}
+    <div class="grid_9 locked">
+        {if $oUser->id == $worker->id}
+            Projekt byl zahájen!
+            {elseif !$project->isOwner($oUser)}
+            Na projektu se pracuje, nemůžete se na něj přihlásit.
+            {else}
+            Projekt je uzamčen.
+            <br/>
+        {/if}
+    </div>
+    <div class="grid_3 lockImage">
+        &nbsp;
+    </div>
+{/block}
+{block button}
+    {if $project->isOwner($oUser)}
+        <a href="#finishProject" role="button" class="btn btn-success" title="Dokončit projekt" data-toggle="modal">
+            Dokončit projekt
+        </a>
+    {/if}
+{/block}
+{block empl}
+    {if $project->isOwner($oUser)}
+        {include "workerInfo.latte" 'worker' => $worker}
+        {include "finishProject.latte"}
+        {else}
+        {include "ownerInfo.latte", 'owner' =>  $owner}
+        {include "workerInfo.latte" 'worker' => $worker}
+    {/if}
+{/block}

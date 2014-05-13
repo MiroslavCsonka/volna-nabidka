@@ -1,0 +1,54 @@
+@import "default.scss";
+
+.userShortInfo{
+   padding-top: 10px;
+}
+
+.accordion-heading {
+   background: $grey;
+}
+
+#profilePicture {
+   margin: 0 auto;
+}
+
+#education {
+   table {
+      margin-bottom: 0;
+   }
+   .school {
+      margin-bottom: 10px;
+   }
+}
+
+.userShortInfo {
+   margin-bottom: 10px;
+}
+
+#education td, #education th {
+   padding: 3px 7px;
+} 
+
+#education table {
+   margin-bottom: 10px;
+} 
+
+#language .pull-right {
+   min-height: 300px;
+} 
+
+#language td, #language th{
+   padding: 3px 7px;
+}
+
+.contentWrap{
+   min-height: 300px;
+}
+
+#updateInformation {
+   height: 200px;
+}
+
+.updateInformation th, .updateInformation td{
+   padding: 5px 10px;
+}

@@ -1,0 +1,30 @@
+<div class="employerInfoWrapper">
+    <div class="grid_12 employerInfo">
+        <div class="grid_12 alpha omega employerInfoHeadline">Info o zadavateli:</div>
+        <div class="grid_2 alpha profilePic">
+            <img src="{$owner->id|picture:"user"}" alt="{$owner->name}"/>
+        </div>
+        <div class="grid_2 userName">
+            <div class="userNameHeadline">Uživatelské jméno:</div>
+            <a n:href="User: $owner->id, $owner->name">
+                {$owner->name}
+            </a>
+        </div>
+        <!-- end of userName -->
+        <div class="grid_3 statistics">
+            <div class="finishedProjects">Dokončených projektů:</div>
+            {$owner->getfinishedProjects(TRUE)}
+        </div>
+        <!-- end of statistics -->
+        <div class="grid_3 suffix_2 rating omega">
+            <span>Hodnocení: {round($owner->rating, 1)}</span>
+
+            <div class="starsWrapper">
+                <div class="stars" style="width: {round($owner->rating, 1) * 20}%;">&nbsp;</div>
+                <!-- nbsp must have -->
+            </div>
+        </div>
+        <!-- end of rating -->
+    </div>
+    <!-- end of employerInfo -->
+</div><!-- end of employerInfoWrapper -->

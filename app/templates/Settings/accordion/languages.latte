@@ -1,0 +1,61 @@
+<div class="accordion-group">
+    <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" href="#language">
+            Jazyky
+            {if $languages->count() > 0}
+                - máte přidány
+                <span class="label label-success">{$languages->count()}</span>
+            {else}
+                - nemáte přidaný žádný jazyk !
+            {/if}
+            <span class="pull-right">
+				{if $languages->count() > 0}
+                    <span class="label label-success">20 / 20</span>
+
+
+					{else}
+
+
+                    <span class="label label-important"> 0 / 20</span>
+                {/if}
+         </span>
+            </span>
+        </a>
+    </div>
+    <div id="language" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <div class="pull-left">
+                <h1>Přidejte si nový jazyk</h1>
+                {control addLanguage}
+            </div>
+            <div class="pull-right">
+                {if $languages->count() > 0}
+                    <h1>Vámi přidané jazyky</h1>
+                    <table class="table grid_5">
+                        <thead>
+                        <tr>
+                            <th>Jazyk</th>
+                            <th>Úroveň</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $languages as $spoj}
+                            <tr>
+                                <td>{$spoj->Language['name']}</td>
+                                <td>{Data::getLevel($spoj['level'])}</td>
+                                <td>
+                                    <a n:href="removeLanguage! $spoj['language_id']" class="close">&times;</a>
+                                </td>
+                            </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                {else}
+                    Nemáte přidaný žádný jazyk, neváhejte si ho přidat
+                {/if}
+            </div>
+            <!-- end of selected languages -->
+        </div>
+    </div>
+</div>

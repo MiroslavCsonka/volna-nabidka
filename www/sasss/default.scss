@@ -1,0 +1,191 @@
+@import "compass/reset";
+@import "grid_960_12col.scss";
+
+$grey: #e3e3e3;
+$blue: #0066CC;
+$red: rgb(185, 74, 72);
+$userPanelGrey: #F1F1F1;
+$tableRowSep: #ddd;
+$tableOddRow: #f9f9f9;
+
+body {
+   line-height: 24px;
+   background: #e8eae1;
+   font-family: Helvetica, Arial;
+}
+
+::selection {
+   background: #fff2a8;
+}
+
+::-moz-selection {
+   background: #fff2a8;
+}
+
+::-webkit-selection {
+   background: #fff2a8;
+}
+
+#pageWrap {
+   position: relative;
+   width: 980px;
+   background: white;
+   margin: 0 auto;
+}
+
+.form-error-message {
+   color: #EA5200;
+   padding-left: 10px;
+   &:before {
+      content: "!";
+      font-weight: bold;
+      background-color: #EA5200;
+      color: white;
+      margin-right: 5px;
+      padding: 1px 8px;
+      border-radius: 50px;
+   }
+}
+
+.form-valid-message:after {
+   content: "✓";
+   color: white;
+   background-color: green;
+   padding: 1px 4px;
+   margin-left: 10px;
+   border-radius: 50px;
+}
+
+.page {
+   margin-left: auto;
+   margin-right: auto;
+   width: 960px;
+   background: inherit;
+}
+
+#loginButtons {
+   margin-top: 30px;
+}
+
+/*
+=HEADER
+*/
+.header a {
+   background: url("../images/design/sprite.png") no-repeat 0 -1270px;
+   width: 488px;
+   height: 57px;
+   margin-top: 15px;
+   margin-bottom: 15px;
+   float: left;
+   text-indent: -9999px;
+}
+
+.login {
+   margin-left: 5px;
+}
+
+/*
+=MENU
+*/
+
+.default {
+   margin-bottom: 5px;
+   border-radius: 5px;
+}
+
+.fixed {
+   position: fixed;
+   top: 0px;
+   z-index: 5;
+   border-bottom-left-radius: 3px;
+   border-bottom-right-radius: 3px;
+   box-shadow: 0 0 5px #222;
+   -webkit-box-shadow: 0 0 5px #222;
+   -moz-box-shadow: 0 0 5px #222;
+}
+
+#userPanelWrapper {
+   height: 42px;
+   #userPanel {
+      background: #F1F1F1;
+      border: 1px solid #DDDDDD;
+      z-index: 50;
+      box-sizing: border-box;
+      height: 37px;
+   }
+}
+
+#search {
+   position: relative;
+   top: 3px;
+}
+
+.menu::selection {
+   background: none;
+}
+
+.menu {
+   margin-bottom: 5px;
+   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.255);
+   border-radius: 6px;
+   background: url('../images/design/MenuBG.jpg') repeat-x;
+   height: 50px;
+   line-height: 50px;
+   ul {
+      li {
+         text-align: center;
+         float: left;
+         &:after {
+            float: left;
+            content: " ";
+            background: url('../images/design/sprite.png') no-repeat 0 -170px;
+            width: 2px;
+            height: 50px;
+         }
+         &:first-child:after {
+            content: "";
+            visibility: hidden;
+         }
+         a {
+            width: 180px;
+            display: inline-block;
+            height: 50px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            text-decoration: none;
+            &:hover {
+               -webkit-transition: color 0.3s;
+               -moz-transition: color 0.3s;
+               -o-transition: color 0.3s;
+               -ms-transition: color 0.3s;
+               transition: color 0.3s;
+               text-shadow: none;
+               color: black;
+            }
+         }
+      }
+   }
+}
+
+/*
+=FOOTER
+*/
+footer {
+   margin: 20px 10px;
+   padding: 20px 0px;
+}
+
+/* Other */
+
+.bold {
+   font-weight: bold;
+}
+
+.pull-center {
+   text-align: center;
+}
+
+.red{
+   color: $red;
+}

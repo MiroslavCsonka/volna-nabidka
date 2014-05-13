@@ -1,0 +1,120 @@
+@import "default.scss";
+
+/*
+Document   : users
+Created on : 24.9.2012, 22:54:12
+Author     : UFO
+Description:
+Purpose of the stylesheet follows.
+*/
+
+/*
+* =SORT BAR
+*/
+.sort {
+   margin-bottom: 15px;
+}
+
+.sortWrapper {
+   background: #F1F1F1;
+   border: 1px solid #DDDDDD;
+   height: 25px;
+   line-height: 25px;
+   border-radius: 5px;
+   padding: 10px 0 10px 10px;
+}
+
+.sort span {
+   margin-right: 25px;
+}
+
+/*
+* =CRITERIA BAR
+*/
+
+.criteriaWrapper {
+   padding: 10px 0 10px 10px;
+   background: #F1F1F1;
+   border-radius: 5px;
+   
+   & aside > div {
+      margin: 15px 0px;
+      &:first-child {
+         margin-top: 0px;
+      }
+   }
+}
+
+.nameFilter input{
+   width: 167px;
+   
+}
+
+.categoriesSelect select{
+   width: 180px;
+   height: 300px;
+}
+
+.numberOfProjectsSelect input{
+   width: 50px;
+}
+
+.pagination{
+   margin: 0;
+}
+
+.myPaging{
+   margin: 10px 0;
+}
+
+/*
+* =USERS
+*/
+
+.users a {
+   color: #222222;
+   
+   .nickName {
+      color: #0088CC;
+   }
+}
+
+.user {
+   border-bottom: 1px dotted darkblue;
+   padding: 15px 0;
+   &:hover {
+      background: #F1F1F1;
+   }
+   &:hover .nickName {
+      text-decoration: underline;
+      color: #0088CC;
+   }
+}
+
+.progressBar {
+   box-sizing: border-box;
+   height: 20px;
+   width: 1px;
+}
+
+.starsWrapper {
+   float: right;
+   background: url("../images/design/sprite.png") no-repeat 0 0;
+   height: 18px;
+   width: 90px;
+   margin-top: 2px;
+}
+
+.starsWrapper img {
+   float: left;
+}
+
+.stars {
+   background: url("../images/design/sprite.png") no-repeat 0 -38px;
+   width: 90px;
+   height: 17px;
+}
+
+.nickName {
+   margin-bottom: 10px;
+}

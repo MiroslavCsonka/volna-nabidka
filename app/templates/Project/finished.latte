@@ -1,0 +1,12 @@
+{extends '@default.latte'}
+{block infoMessage}
+    <div class="grid_12 finished">
+        Tento projekt je již ukončen
+    </div>
+   {* TODO: Přidat nějakej obrázek na grid_3 (něco jako tick - done) *}
+{/block}
+{block empl}
+    {include "ownerInfo.latte", 'owner' =>  $owner}
+    {include "workerInfo.latte" 'worker' => $employee}
+{/block}
+   

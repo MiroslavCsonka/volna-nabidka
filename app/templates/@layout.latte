@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>{block title}{/block} | Volná nabídka</title>
+    {* META *}
+    <meta name="description" content="Volná Nabídka - Stránka která poskytuje vytváření pracovních nabídek a projektů">
+    <meta name="keywords" content="Volná Nabídka, práce, projekty, nabídka práce, volná místa, zaměstnání">
+    <meta name="author" content="Martin Svoboda, Mirek Csonka">
+    <link rel="shortcut icon" href="{$basePath}/favicon.ico"/>
+    {* JQuery UI *}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="{$basePath}/components/jquery/jquery.ui.selectmenu.js" type="text/javascript"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/redmond/jquery-ui.css" rel="stylesheet"
+          type="text/css">
+    <link href="{$basePath}/components/jquery/jquery.ui.selectmenu.css" rel="stylesheet" type="text/css">
+    {* TWITTER BOOTSTRAP *}
+    <script src="{$basePath}/components/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <link href="{$basePath}/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    {* CHOSEN COMPONENT *}
+    <link rel="stylesheet" href="{$basePath}/components/Chosen/chosen.css" type="text/css"/>
+    <script src="{$basePath}/components/Chosen/chosen.jquery.min.js" type="text/javascript"></script>
+    {block head}{/block}
+</head>
+<body>
+{control facebook:init}
+<div id="pageWrap">
+    <div class="page">
+        <header class="container_12 clearfix" id="header">
+            <h1 class="header grid_8">
+                <a n:href="Homepage:" title="Volná Nabídka">Volná nabídka</a>
+            </h1>
+
+            <div id="loginButtons" class="grid_4">
+                {if $user->isLoggedIn()}
+                    Vítejte, {$user->identity->name}
+                    <a n:href="Sign:out">odhlásit se</a>
+                {else}
+                    <ul>
+                        <li class="pull-right login">
+                            <a data-toggle="modal" data-target="#loginModal" class="btn btn-primary" href="#">
+                                Přihlásit se
+                            </a>
+                        </li>
+                        <li class="pull-right">
+                            <a n:href="Sign:register" class="btn btn-warning">Registrace</a>
+                        </li>
+                        <li>
+                            {include "loginModal.latte"}
+                        </li>
+                    </ul>
+                {/if}
+            </div>
+            <!-- END OF login -->
+            <div class="menu grid_12">
+                <ul>
+                    <li><a n:href="Homepage:">Domů</a></li>
+                    <li><a n:href="Projects:">Projekty</a></li>
+                    <li><a n:href="Users:">Uživatelé</a></li>
+                    <li><a n:href="QuickAdd:">Přidat nabídku</a></li>
+                    <li><a n:href="AboutUs:">Kontakty</a></li>
+                </ul>
+            </div>
+            <!-- end of menu -->
+            {if $user->isLoggedIn()}
+                {include 'userPanel.latte'}
+            {/if}
+            {snippet flashMessage}
+            {foreach $flashes as $flash}
+                <div class="alert grid_12 {$flash->type}" style="box-sizing: border-box;">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {$flash->message}
+                </div>
+            {/foreach}
+            {/snippet}
+        </header>
+        <div class="main container_12" role="main" id="main">
+            {block content}{/block}
+        </div>
+        <!-- end of main -->
+        <footer class="container_12" id="footer">
+            <div class="grid_12 muted pull-center">
+                Volná Nabídka &copy; {date('Y')} UFO a Forex
+            </div>
+        </footer>
+    </div>
+    <!-- end of page -->
+</div>
+<!-- end of pageWrap -->
+{* SCRIPTS INCLUDING *}
+   {var $scripts = array("netteForms","design","netteAjax","jquery.ajaxform")}
+   {foreach $scripts as $script}
+      <script src="{$basePath}/js/{$script}.js" type="text/javascript"></script>
+   {/foreach}
+   <script type="text/javascript">
+      $(".chosen").chosen();
+   </script>
+{block javaScripts}{/block}
+</body>
+</html>
+

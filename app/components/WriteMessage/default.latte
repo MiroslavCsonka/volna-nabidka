@@ -1,0 +1,51 @@
+<div style="padding: 10px 20px;">
+    {form messageForm}
+        <table>
+            <tr>
+                <th>
+                    {label users/}
+                </th>
+                <td>
+                    {input users, class=>'chosenAjax',data-placeholder=>"Vyberte uživatele..." ,style=>'width: 300px;'}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {label text/}
+                </th>
+                <td>
+                    {input text}
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    {input submit, class => "btn btn-info"}
+                </td>
+            </tr>
+        </table>
+    {/form}
+    <script src="{$basePath}/components/ajax-chosen/ajax-chosen-master/lib/ajax-chosen.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".chosenAjax").ajaxChosen({
+                    type:'GET',
+                    url:{plink Messages:getUsers},
+                    dataType:'json',
+                    minTermLength:1,
+                    afterTypeDelay:1000,
+                    lookingForMsg:'Hledám pro',
+                    no_results_text:'Uživatel nenalezen'
+            }, function (data) {
+                    console.log(data);
+                    var results = [];
+
+                    $.each(data, function (i, val) {
+                            results.push({ value:val.value, text:val.text });
+                    });
+
+                    return results;
+            });
+    });
+    </script>
+</div>

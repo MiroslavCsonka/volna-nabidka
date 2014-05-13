@@ -1,0 +1,60 @@
+<div id="education" class="accordion-group">
+    <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" href="#collapse4">
+            Vzdělání -
+            {if $schools->count() > 0}
+                máte přidány
+                <span class="label label-success">{$schools->count()}</span>
+            {else}
+                nemáte přidanou školu !
+            {/if}
+            <span class="pull-right">
+				{if $schools->count() > 0}
+                    <span class="label label-success">20 / 20</span>
+
+
+					{else}
+
+
+                    <span class="label label-important"> 0 / 20</span>
+                {/if}
+			</span>
+        </a>
+    </div>
+    <div id="collapse4" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <div class="grid_5 alpha">
+                {control addEducation}
+            </div>
+            <!-- form to add education -->
+            <div n:if="!empty($schools)" class="grid_6 omega educations">
+                <table class="table educationTable">
+                    <thead>
+                    <tr>
+                        <th> Jméno školy</th>
+                        <th> Zaměření</th>
+                        <th> Rok ukončení</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach $schools as $school}
+                        <tr>
+                            <td> {$school['name']}</td>
+                            <td> {$school['focus']}</td>
+                            <td> {$school['end']}</td>
+                            <td>
+                                <a n:href="deleteEducation! $school['id']" class="close">
+                                    &times;
+                                </a>
+                            </td>
+                        </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+            <!-- end of schools -->
+        </div>
+    </div>
+</div>

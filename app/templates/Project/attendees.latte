@@ -1,0 +1,56 @@
+{snippet attendees}
+{if $project->isOwner($oUser)}
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                Ucházející se o projekt
+            </a>
+        </div>
+        <!-- end of accordion-heading -->
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner clearfix">
+                {if count($attendees) > 0}
+                    {foreach $attendees as $user}
+                        <div class="user grid_12 alpha omega">
+                            <div class="profileThumb grid_2 alpha">
+                                <img src="{$user->id|picture:"user"}" alt="{$user->name}"/>
+                            </div>
+                            <div class="profileInfo grid_7">
+                                <div class="nickName grid_2 alpha">
+                                    <a n:href="User: $user->id, $user->name">
+                                        {$user->name}
+                                    </a>
+                                </div>
+                                <div class="grid_3 ratingWrapper">
+                                    <div class="starsWrapper">
+                                        <div class="stars" style="width: {round($user->rating, 1) * 20}%;">
+                                            &nbsp;
+                                        </div>
+                                        <!-- nbsp must have -->
+                                    </div>
+                                </div>
+                                <!-- end of stars -->
+                                <div class="progressBarInfo grid_2 omega">Level:{floor($user->getLevel())}</div>
+                            </div>
+                            <!-- end of profileInfo -->
+                            <div class="hireMe grid_2">
+                                <a n:href="lock!, $user->id" class="btn btn-success btn-small">Zahajte se mnou práci</a>
+                            </div>
+                            <div class="remove grid_1 omega">
+                                <a n:href="revokeUser! $user->id, $project->id"
+                                   title="Odebrat uživatele {$user->name} z projektu {$project->name}"></a>
+                            </div>
+                        </div>
+                        <!-- end of user -->
+                    {/foreach}
+                {else}
+                    <div class="grid_12">Doposud se nikdo nepřihlásil</div>
+                {/if}
+            </div>
+            <!-- end of accordion-inner -->
+        </div>
+        <!-- end of accodrion-body -->
+    </div>
+    <!-- end of accordion-group -->
+{/if}
+{/snippet}

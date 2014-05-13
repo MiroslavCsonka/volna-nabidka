@@ -1,0 +1,45 @@
+<!-- Modal -->
+<div id="hireMe"
+     class="modal hide fade"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true"
+     style="display:none;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h5>Zaměstnejte mě:</h5>
+    </div>
+    <div class="modal-body">
+        <table class="table table-bordered" style="margin-top: 15px;">
+            <thead>
+            <tr>
+                <th style="width: 70%;">Projekt</th>
+                <th style="width: 30%;">&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            {if count($projectsForInvitation) > 0}
+                {foreach $projectsForInvitation as $projectForInvitation}
+                    <tr>
+                        <td>
+                            <a n:href="Project:detail, $projectForInvitation->id">{$projectForInvitation->name}</a>
+                        </td>
+                        <td style="padding-left: 10px;">
+                            <a n:href="sendInvitation!, $projectForInvitation->id, $currentUser->id"
+                               class="btn btn-success">Poslat pozvánku</a>
+                        </td>
+                    </tr>
+                {/foreach}
+            {else}
+                <tr>
+                    <td>
+                        Nemáte žádné projekty, na které byste mohli uživatele {$currentUser->name} pozvat.
+                    </td>
+                    <td></td>
+                </tr>
+            {/if}
+            </tbody>
+        </table>
+    </div>
+</div>

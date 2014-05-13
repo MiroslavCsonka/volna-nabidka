@@ -1,0 +1,23 @@
+{block head}
+    <link href="{$basePath}/css/default.css" type="text/css" rel="stylesheet"/>
+{/block}
+
+{block #title}Administrace{/block}
+
+{block content}
+    <div class="grid_12">
+        <h1>Administrace</h1>
+        <ul>
+            <li>
+                <a n:href="Administration:users">
+                    Správa uživatelů
+                </a>
+            </li>
+            <li>
+                <a n:href="Administration:cities">
+                    Správa měst
+                </a>
+            </li>
+        </ul>
+    </div>
+{/block}

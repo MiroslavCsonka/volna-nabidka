@@ -1,0 +1,57 @@
+{block head}
+    <link href="{$basePath}/css/default.css" type="text/css" rel="stylesheet"/>
+    <style type="text/css">
+        .line-through {
+      text-decoration: line-through;
+   }
+        .noNotifications {
+                      padding: 15px 0;
+                      color: rgb(185, 74, 72);
+        }
+    </style>
+{/block}
+{block title}Notifikace{/block}
+{block content}
+    <div class="grid_12">
+        {if count($notifications) > 0}
+            <table class="table table-bordered" style="margin-top: 15px;">
+                <thead>
+                <tr>
+                    <th style="width: 70%;">Notifikace</th>
+                    <th style="width: 15%;">Datum</th>
+                    <th style="width: 10%;">Akce</th>
+                    <th style="width: 5%;">Smazat</th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $notifications as $notification}
+                    <tr>
+                        <td n:class="($notification->getState() == \Message::READ) ? line-through" style="width: 70%;">
+                            {*Neescapovat, tohle si v každém případě píšeme my a ne user*}
+                            {!$notification->message}
+                        </td>
+                        <td style="width: 10%;">
+                            {$notification->date|czechDate}
+                        </td>
+                        <td style="width: 10%;">
+                            {if ($notification->getState() == \Message::UNREAD)}
+                                <a n:href="markRead!, $notification->id" class="btn btn-info">Přečteno</a>
+                            {else}
+                                <a n:href="markUnread!, $notification->id" class="btn btn-info">Nepřečteno</a>
+                            {/if}
+                        </td>
+                        <td style="width: 10%;">
+                            <a n:href="markDeleted!, $notification->id" class="btn btn-warning">Smazat</a>
+                        </td>
+                    </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        {else}
+            <div class="grid_12 alpha omega noNotifications pull-center">
+                Nemáte žádné nové notifikace
+            </div>
+        {/if}
+    </div>
+    <!-- end of grid_12 wrap -->
+{/block}

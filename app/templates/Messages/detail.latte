@@ -1,0 +1,44 @@
+{block head}
+    <link rel="stylesheet" href="{$basePath}/css/messages.css" type="text/css"/>
+    <meta name="robots" content="noindex, nofollow">
+{/block}
+{block #title}Detail zprávy{/block}
+{block content}
+    <div class="contentWrap grid_12">
+        <span class="bold grid_12 alpha omega">Do konverzace mají přístup:</span>
+        {foreach $users as $user}
+            <a n:href="User:default, $user->id">{$user->name}</a>{sep},{/sep}
+        {/foreach}
+        <hr>
+        <div class="messagesWrap grid_12 alpha omega">
+            {foreach $messages as $message}
+                <div class="messageWrap grid_12 alpha omega">
+                    <div class="miniProfilePicture grid_1 alpha">
+                        <a n:href="User:default, $message->user_id" alt="{$message->name}" title="{$message->name}">
+                            <img src="{$message->user_id|picture:"user", "mini"}" alt="{$message->name}"/>
+                        </a>
+                    </div>
+                    <div class="messageContent grid_8">
+                        {$message->content}
+                    </div>
+                    <div class="messageDate grid_2 suffix_1 omega">
+                        {$message->date|czechDateTime}
+                    </div>
+                </div>
+            {/foreach}
+        </div>
+        <hr>
+        {form writeMessageToThreadForm}
+            <table class="newMessageTable grid_12 alpha omega">
+                <tr>
+                    <td class="grid_10 alpha">
+                        <input n:input="text" class="grid_10 alpha omega" style="height: 100px;" autocomplete="off">
+                    </td>
+                    <td class="grid_2 omega">
+                        {input submit, class => "btn btn-info"}
+                    </td>
+                </tr>
+            </table>
+        {/form}
+    </div>
+{/block}

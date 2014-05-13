@@ -1,0 +1,41 @@
+{extends '@default.latte'}
+{block button}
+    {if $project->isOwner($oUser)}
+        <a n:href="Project:modify, $project->id" class="btn btn-success">Upravit projekt</a>
+    {else}
+        {if $user->isLoggedIn()}
+            {if $oUser->isSignedToProject($project->getId())}
+                <a class="btn btn-warning" n:href="signOutFromProject! $project->getId()">
+                    Odhlásit se od projektu
+                </a>
+            {elseif !$oUser->canSignToProject($project->getId())}
+                <button class="btn btn-danger">
+                    Vlastník projektu vás vyřadil
+                </button>
+            {elseif $project->isExpired()}
+                <button class="btn btn-danger">
+                    Projekt již není aktivní
+                </button>
+            {else}
+                <a class="btn btn-warning" n:href="signToProject! $project->getId()">
+                    Přihlásit se k projektu
+                </a>
+            {/if}
+        {else}
+            <a data-toggle="modal" data-target="#loginModal" class="btn btn-link" href="#">
+                Přihlašte se, pokud se chcete účastnit
+            </a>
+        {/if}
+    {/if}
+{/block}
+{block attendees}
+    <div class="accordion grid_12" id="accordion">
+        {include "attendees.latte", "attendees" => $project->getAttendees()}
+    </div>
+    <!-- end of accordion -->
+{/block}
+{block empl}
+    {if !$project->isOwner($oUser)}
+        {include "ownerInfo.latte", 'owner' =>  $owner}
+    {/if}
+{/block}

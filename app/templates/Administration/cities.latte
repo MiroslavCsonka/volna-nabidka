@@ -1,0 +1,17 @@
+{block head}
+    <link href="{$basePath}/css/default.css" type="text/css" rel="stylesheet"/>
+    <link href="{$basePath}/components/Grido/css/grido.css" type="text/css" rel="stylesheet"/>
+    <script src="{$basePath}/components/Grido/grido.js"></script>
+{/block}
+
+{block #title}Administrace{/block}
+
+{block content}
+    <div class="grid_12">
+        <h1>Administrace měst</h1>
+        {control citiesGrid}
+        <hr>
+        <h1>Přidat město</h1>
+        {control addCity}
+    </div>
+{/block}

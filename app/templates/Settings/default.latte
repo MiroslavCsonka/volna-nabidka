@@ -1,0 +1,128 @@
+{block head}
+    <link rel="stylesheet" href="{$basePath}/css/settings.css" type="text/css"/>
+    <meta name="robots" content="noindex, nofollow">
+{/block}
+{block title} Nastavení {/block}
+{block content}
+    <div class="userShortInfo grid_12">
+        <div class="grid_3 alpha">
+            <div class="grid_3 alpha omega">
+                <img id="profilePicture" src="{$user->getId()|picture:"user"}">
+            </div>
+            {control updateProfilePicture}
+            <!-- Button to trigger modal -->
+            <a href="#changePassword" data-toggle="modal" class="btn btn-block">změnit heslo</a>
+        </div>
+        <div class="remaining prefix_1 grid_3">
+            {snippet itemsToFill}
+            {var $howMuch  = ($languages->count() > 0)   ? 20 : 0}
+            {var $howMuch += ($schools->count() > 0)     ? 20 : 0}
+            {var $howMuch += ($oldProjects->count() > 0) ? 20 : 0}
+            {var $howMuch += !empty($categories)         ? 20 : 0}
+            {var $howMuch += !empty($oUser->city)        ? 20 : 0}
+            {if $howMuch < 100}
+                <p class="text-error">Zbývá vám vyplnit </p>
+                <ul style="list-style: circle;">
+                    <li n:if="!strlen($oUser->city) > 0">
+                        Adresa
+                    </li>
+                    <li n:if="empty($categories)">
+                        Profese
+                    </li>
+                    <li n:if="!($oldProjects->count() > 0)">
+                        Reference
+                    </li>
+                    <li n:if="!($languages->count() > 0)">
+                        Jazyky
+                    </li>
+                    <li n:if="!($schools->count() > 0)">
+                        Vzdělání
+                    </li>
+                </ul>
+            {else}
+                &nbsp;<!-- must have -->
+            {/if}
+            {/snippet}
+        </div>
+        <!-- end of remaining -->
+        <div class="completion grid_5 omega">
+            {snippet completionBar}
+            {var $howMuch  = ($languages->count() > 0)   ? 20 : 0}
+            {var $howMuch += ($schools->count() > 0)     ? 20 : 0}
+            {var $howMuch += ($oldProjects->count() > 0) ? 20 : 0}
+            {var $howMuch += !empty($categories)         ? 20 : 0}
+            {var $howMuch += strlen($oUser->city) > 0    ? 20 : 0}
+                <ul>
+                    <li>
+                        {($howMuch) >= 100 ? 'Váš profil je kompletní !': "Váš profil je vyplněn z $howMuch%"}
+                    </li>
+                    <li>
+                        <div class="progress progress-striped active">
+                            <div class="bar bar-warning" style="width: {$howMuch}%;"></div>
+                        </div>
+                    </li>
+                </ul>
+            {/snippet}
+            {snippet categories}
+                <div>
+                    Vyberte si kategorii
+                    {form updateCategory, class => "ajax"}
+                    {input   categories class => 'chosen',
+                    data-placeholder => "Vyberte si vaši profesi",
+                    multiple => true,
+                    tabindex => 6,
+                    style => "width: 380px;"}
+                    {/form}
+                    <script type="text/javascript">
+                        $("#frmupdateCategory-categories").change(function () { $(this).submit(); });
+                        $(".chosen").chosen();
+                        $('.chosen').change(function (){
+                            var $this = $(this);
+                        });
+                    </script>
+                </div>
+            {/snippet}
+        </div>
+        <!-- end of completion -->
+    </div>
+    <!-- end of userShortInfo -->
+    <div class="grid_12">
+        <div class="accordion">
+            {include "accordion/aboutMe.latte"}
+            {include "accordion/contact.latte"}
+            {include "accordion/languages.latte", 'languages' => $languages}
+            {include "accordion/references.latte" 'oldProjects' => $oldProjects}
+            {include "accordion/education.latte", 'schools' => $schools}
+        </div>
+    </div>
+    <div id="changePassword" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Změna hesla</h3>
+        </div>
+        {form changePassword}
+            <div class="modal-body">
+                <table>
+                    <tr>
+                        <td>{label old/}</td>
+                        <td>{input old}</td>
+                    </tr>
+                    <tr>
+                        <td>{label pass/}</td>
+                        <td>{input pass}</td>
+                    </tr>
+                    <tr>
+                        <td>{label passwordAgain/}</td>
+                        <td>{input passwordAgain}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <a class="btn" data-dismiss="modal" aria-hidden="true">zavřít</a>
+                <input n:input="submitButton" type="submit" class="btn btn-primary">
+            </div>
+        {/form}
+    </div>
+    <!-- end of modal -->
+{/block}

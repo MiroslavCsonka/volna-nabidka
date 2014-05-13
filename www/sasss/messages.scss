@@ -1,0 +1,40 @@
+@import "default.scss";
+
+#navWithRightmargin {
+   margin-right: 10px;
+   box-sizing: border-box;
+}
+
+.contentWrap{
+   padding-top: 10px;
+}
+
+.messagesWrap{
+   max-height: 400px;
+   overflow-y: scroll;
+   overflow-x: hidden;
+}
+
+.messageWrap{
+   padding: 10px 0;
+}
+
+.miniProfilePicture img{
+   width: 70px;
+}
+
+.table tr td{
+   padding: 0;
+   a div{
+      padding: 8px;
+   }
+}
+
+.newMessageTable{
+   padding-top: 10px;
+}
+
+#noMessages{
+   padding-top: 10px;
+   color: $red;
+}

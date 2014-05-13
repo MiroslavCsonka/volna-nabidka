@@ -1,0 +1,96 @@
+{block head}
+    <link rel="stylesheet" href="{$basePath}/css/quickAdd.css" type="text/css"/>
+    <meta name="robots" content="noindex, nofollow">
+    <script>
+        $(function () {
+            $("#tabs").tabs();
+            $("#datepicker").datepicker({
+               dateFormat: "dd-mm-yy",
+               dayNamesMin: [ "Po", "Út", "St", "Čt", "Pá", "So", "Ne" ],
+               monthNames: [ "Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec" ],
+               minDate: new Date()
+            });
+        });
+    </script>
+{* TINYMCE *}
+    <script type="text/javascript" src="{$basePath}/components/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+    <script type="text/javascript">
+        tinyMCE.init({
+                mode:"textareas",
+                theme:"simple"
+        });
+    </script>
+{/block}
+{block title}Přidat Nabídku{/block}
+{block content}
+<div class="grid_12 Wrapper">
+    <div id="tabs" class="clearfix">
+        <ul>
+            <li><a href="#tabs-3">Projekt</a></li>
+        </ul>
+        <div id="tabs-3" class="postProject">
+            {if $user->isLoggedIn()}
+                {form addProject}
+                    <table>
+                        <tr>
+                            <td>{label name, class => projectNameInput/}</td>
+                            <td>{input name, placeholder => "Zadejte jméno projektu", class => 'input'} <span
+                                        class="red">*</span></td>
+                        </tr>
+                        <tr>
+                            <td>{label categories/}</td>
+                            <td>{input categories, class => 'chosen input'} <span class="red">*</span></td>
+                        </tr>
+                        <tr>
+                            <td>{label location/}</td>
+                            <td>{input location, class => 'chosen input' }</td>
+                        </tr>
+                        <tr>
+                            <td>{label scale/}</td>
+                            <td>{input scale, class => 'chosen input'} <span class="red">*</span></td>
+                        </tr>
+                        <tr>
+                            <td>{label pricing/}</td>
+                            <td>{input pricing, class => 'chosen rewardTypeInput input'} <span class="red">*</span></td>
+                        </tr>
+                        <tr>
+                            <td>{label reward/}</td>
+                            <td>{input reward, placeholder => "Zadejte odměnu v KČ", class => 'input'}Kč <span
+                                        class="red">*</span></td>
+                        <tr>
+                            <td>{label description/}</td>
+                            <td>{input description , class => 'input'}</td>
+                        </tr>
+                        <tr>
+                            <td>{label deadline/}</td>
+                            <td>{input deadline, id => 'datepicker'} <span class="red">*</span></td>
+                        </tr>
+                        <tr>
+                            <td>{input submitAddProject, class => 'btn btn-success', value => 'Přidat projekt: '}</td>
+                        </tr>
+                    </table>
+                {/form}
+                <div class="info">
+                    <span class="red">* </span>
+                    Povinné položky
+                </div>
+            {else}
+                <div class="notLogged">
+                    Pokud chcete přidat nabídku <a style="color: #0088CC;" data-toggle="modal" data-target="#loginModal"
+                                                   href="#">přihlašte se</a>
+                    prosím, nebo se <a style="color: #0088CC;" n:href="Sign:register"
+                                       title="Registrovat se v systému Volná Nabídka">zaregistrujte</a>
+                </div>
+            {/if}
+        </div>
+    </div>
+</div>
+<!-- Script, který zobrazí error fieldy u chosenu -->
+<script type="text/javascript">
+    $(function () {
+                $(".chzn-container").live("click", function () {
+                        $("#frmaddProject-categories_message").show();
+                        $("#frmaddProject-scale_message").show();
+         })
+        })
+</script>

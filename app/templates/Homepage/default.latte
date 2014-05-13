@@ -1,0 +1,149 @@
+{block head}
+    <link href="{$basePath}/css/index.css" type="text/css" rel="stylesheet"/>
+    <meta name="robots" content="index, follow">
+    <script src="{$basePath}/components/Slides/slides.min.jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+                $('.styleThisSelect').selectmenu();
+                $('#slides').slides({
+                        preload:true,
+                        effect:'slide',
+                        crossfade:true,
+                        slideSpeed:350,
+                        fadeSpeed:500,
+                        generatePagination:false,
+                        play:5000
+                });
+        });
+    </script>
+    <style>
+        .styleThisSelect
+
+        {
+             width: 200px;
+          }
+    </style>
+{/block}
+{block #title}Domovská stránka{/block}
+{block content}
+    <div class="slideshow grid_12">
+        {include 'slideshow.latte'}
+        <div class="postProjectWrap">
+            <div class="postProject">
+                <h3>Jaký typ nabídky <br/>chcete vložit?</h3>
+                {form categories}
+                {input staticCategories, class => 'styleThisSelect mainCategory'}
+                    <div n:snippet="subCategories" class="selectSubCategory">
+                        <span class="clearfix">Vyberte si pod kategorii &darr;</span>
+                        {input dynamicCategories, class => 'styleThisSelect'}
+                        {input submit, class => 'btn btn-warning btn-large'}
+                        <script type="text/javascript">
+                            $("form").on('change', '#' +{$control["categories-staticCategories"]->htmlId}, function () {
+                              $.get("?do=selectLoad", {"id": $(this).val()});
+                            });
+                            $('.styleThisSelect').selectmenu();
+                        </script>
+                    </div>
+                {/form}
+            </div>
+            <!-- end of postProject -->
+        </div>
+        <!-- end of postProject -->
+        {include 'pagging.latte'}
+    </div>
+    <!-- end of slideShow -->
+    <div class="motivation grid_8">
+        <div class="motivationHeader">Jak Vám pomůžeme?</div>
+        <article>
+            <h3>Jednoduchá administrace</h3>
+
+            <p>
+                U nás si pomocí jednoduchých kroků, kterými Vás provedeme obvoláte všechny zájemce
+            </p>
+        </article>
+        <article>
+            <h3>Žádné složité hledání v emailu</h3>
+
+            <p>
+                Už nemusíte lovit kdo co Vám kdy psal, u nás jednoduše máte vše u inzerátu
+            </p>
+        </article>
+        <article>
+            <h3>Vše na jednom místě</h3>
+
+            <p>
+                Projekty, pracovní nabídka a příležitosti na jednom místě
+            </p>
+        </article>
+        <article>
+            <h3>Přímé oslovení pracovníků</h3>
+
+            <p>
+                Při vytvoření pracovní pozice, můžete rovnou kontaktovat všechny zájemce hromadným emailem
+            </p>
+        </article>
+    </div>
+    <!-- end of motivation -->
+    <div class="counter grid_4">
+        <div class="counterHeader">Čísla mluví za nás</div>
+        <table>
+            <tr>
+                <th>Počet registrovaných:</th>
+                <td>{$numOfUsers}</td>
+            </tr>
+            <tr>
+                <th>Počet inzerátů:</th>
+                <td>{$numOfProjects}</td>
+            </tr>
+            <tr>
+                <th>Volných projektů:</th>
+                <td>{$availableProjects}</td>
+            </tr>
+            <tr>
+                <th>Projekty v hodnotě:</th>
+                <td>{$sumOfProjectRewards} Kč</td>
+            </tr>
+        </table>
+    </div>
+    <!-- end of counter -->
+    <div class="categories grid_12">
+        <div class="categoryHeader">Kategorie</div>
+        <div class="mainCategories">
+            <div class="accordion" id="accordion">
+                {foreach $categories as $key => $mainCategory}
+                    <div class="accordion-group categoryWrapper">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapse-{$key|webalize}">
+                                <div class="mainCategory">{$key}<span class="muted"> - ({count($mainCategory)})</span>
+                                </div>
+                                <!-- end of mainCategory -->
+                            </a><!-- end of collapse -->
+                        </div>
+                        <!-- end of accordion-heading -->
+                        {var $cnt = ceil(count($mainCategory)/4)}{*Kolik je na jedno ul subcategorií*}
+                        <div id="collapse-{$key|webalize}" class="accordion-body collapse {first}in{/first}">
+                            <div class="accordion-inner clearfix">
+                                {foreach $mainCategory as $subCatId => $category}
+                                    {first $cnt}<ul class="subCategory">{/first}
+                                    <li>
+                                        <h4>
+                                            <a n:href="Projects:default, $subCatId">{$category}</a>
+                                        </h4>
+                                    </li>
+                                    {last $cnt}</ul><!-- end of subcategory -->{/last}
+                                {/foreach}
+                            </div>
+                            <!-- end of accordion-inner -->
+                        </div>
+                        <!-- end of collapse -->
+                    </div>
+                    <!-- end of categoryWrapper accordion-group -->
+                {/foreach}
+            </div>
+            <!-- end of accordion -->
+        </div>
+        <!-- end of main categories -->
+    </div>
+    <!-- end of categories -->
+{/block}

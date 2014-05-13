@@ -1,0 +1,74 @@
+<div class="slideshowContent clearfix">
+    <div id="slides">
+        <div class="slides_container" style="width: 600px;">
+            <div class="slide">
+                <h2>Vytvoření nabídky</h2>
+
+                <div>
+                    <p>
+                        Nový projekt vytvoříte velice snadno, pomocí jednoduchých kroků v sekci: <br/><a
+                                n:href="QuickAdd:">Přidat nabídku</a>
+                    </p>
+
+                    <div class="addProject"></div>
+                </div>
+            </div>
+            <div class="slide">
+                <h2>Pozvání uchazečů</h2>
+
+                <div>
+                    <p>
+                        Po založení nového projektu můžete vyhledat vhodné uživatele v sekci: <a n:href="Users:">Uživatelé</a>.<br/>
+                        Nebo počkat až se lidé na projekt přihlásí.
+                    </p>
+
+                    <div class="searchUser"></div>
+                </div>
+            </div>
+            <div class="slide">
+                <h2>Výběr vhodných adeptů</h2>
+
+                <div>
+                    <p>
+                        Vyberte si vhodného adepta z přihlášených účastníků podle životopisů.
+                        <br/><br/>
+                    </p>
+
+                    <div class="cv"></div>
+                </div>
+            </div>
+            <div class="slide">
+                <h2>Zahájení práce</h2>
+
+                <div>
+                    <p>
+                        Zahajte práci s uživatelem Vaší volby.
+                    </p>
+                    <br/>
+
+                    <div class="startWork"></div>
+                </div>
+            </div>
+            <div class="slide">
+                <h2>Ohodnocení spolupráce</h2>
+
+                <div>
+                    <p>
+                        Dokončete projekt a ohodnoťte Vašeho zaměstnance.
+                    </p>
+                    <br/>
+
+                    <div class="rateAttendee"></div>
+                </div>
+            </div>
+        </div>
+        <ul class="pagination" style="display: none;">
+            {var $images = array('plus','invite','adepts','startwork','star')}
+            <li n:foreach="$images as $image">
+                <a href="#" id="lineUp{$iterator->counter}">
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- end of slide -->
+</div><!-- end of slideshowContent -->

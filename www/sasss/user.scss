@@ -1,0 +1,377 @@
+@import "default.scss";
+
+.profilePicture {
+   padding-top: 10px;
+}
+
+.userName {
+   line-height: 40px;
+   font-weight: bold;
+}
+
+.categories {
+   margin-top: 15px;
+   border-right: 1px dotted darkblue;
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   -ms-box-sizing: border-box;
+   box-sizing: border-box;
+}
+
+.categories fieldset legend {
+   color: darkblue;
+   padding-left: 5px;
+}
+
+.categories fieldset > span {
+   padding-left: 15px;
+}
+
+.contactMe {
+   line-height: 40px;
+}
+
+.lvlBar {
+   margin-top: 15px;
+}
+
+.lvlBar progress {
+   margin-top: 10px;
+}
+
+/*
+=ABOUT
+*/
+.cv {
+   padding: 15px 0;
+   border-top: 1px dotted darkblue;
+   border-bottom: 1px dotted darkblue;
+   margin-top: 15px;
+}
+
+.aboutMe {
+   padding-bottom: 10px;
+   strong{
+      font-weight: bold;
+   }
+   p{
+      padding: 5px 0 0 10px;
+   }
+}
+
+.contacts strong{
+   font-weight:bold;
+}
+
+.contacts{
+   padding-bottom: 10px;
+}
+
+.cv h2 {
+   margin-bottom: 15px;
+   font-size: 24px;
+   color: $blue;
+}
+
+.contactsWrap{
+   margin-top: 10px;
+   padding-left: 10px;
+   strong{
+      float: left;
+   }
+   span{
+      float: right;
+   }
+}
+
+.languages > strong{
+   font-weight:bold;
+}
+
+.languages{
+   padding-bottom: 10px;
+}
+
+.languagesWrap{
+   margin-top: 10px;
+   padding-left: 10px;
+   strong{
+      float: left;
+      color: $blue;
+      font-weight: bold;
+   }
+   span{
+      float: right;
+   }
+}
+
+.icq:after{
+   content: " ";
+   background: url("../images/design/sprite.png") no-repeat 0 -1089px;
+   width: 15px;
+   height: 15px;
+   position: absolute;
+}
+.skype:after{
+   content: " ";
+   background: url("../images/design/sprite.png") no-repeat 0 -1960px;
+   width: 15px;
+   height: 15px;
+   position: absolute;
+}
+.telephone:after{
+   content: " ";
+   background: url("../images/design/sprite.png") no-repeat 0 -1363px;
+   width: 15px;
+   height: 15px;
+   position: absolute;
+}
+.mail:after{
+   content: " ";
+   background: url("../images/design/sprite.png") no-repeat 0 -1020px;
+   width: 14px;
+   height: 14px;
+   position: absolute;
+}
+.faceBook:after{
+   content: " ";
+   background: url("../images/design/sprite.png") no-repeat 0 -1054px;
+   width: 15px;
+   height: 15px;
+   position: absolute;
+}
+
+.oldProjects > strong{
+   font-weight:bold;
+}
+
+.oldProjects{
+   padding-bottom: 10px;
+}
+
+.oldProjectsWrap{
+   margin-top: 10px;
+   strong{
+      margin-top: 10px;
+      color: $blue;
+      font-weight: bold;
+   }
+   span{
+      margin-top: 10px;
+   }
+}
+
+.education > strong{
+   font-weight:bold;
+}
+
+.tableHeadline{
+   background: $tableOddRow;
+}
+
+.education{
+   padding-bottom: 10px;
+}
+
+.educationWrap{
+   margin-top: 10px;
+   strong{
+      margin-top: 10px;
+      color: $blue;
+      font-weight: bold;
+   }
+   span{
+      margin-top: 10px;
+   }
+}
+
+.firstLineWrapper{
+   padding: 10px 0;
+}
+.secondLineWrapper{
+   padding: 10px 0;
+}
+
+/*
+=STATISTICS
+*/
+.statistics {
+   border-right: 1px dotted darkblue;
+   
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   -ms-box-sizing: border-box;
+   box-sizing: border-box;
+   padding: 15px 0px;
+}
+
+.statistics h3 {
+   font-size: 18px;
+}
+
+.statistics > * {
+   padding-left: 10px;
+}
+
+.statistic {
+   margin: 15px 0;
+}
+
+.headline {
+   float: left;
+   line-height: 36px; /* height relative to 24px of height + 10px padding + 2px border */
+}
+
+.green {
+   width: 35px;
+   height: 24px;
+   text-shadow: 1px 0px 2px white;
+   text-align: center;
+   padding: 5px 3px;
+   background: #93DA46;
+   border-radius: 5px;
+   border: 1px solid #cccccc;
+   float: right;
+   margin-right: 10px;
+}
+
+.orange {
+   width: 35px;
+   height: 24px;
+   text-shadow: 1px 0px 2px white;
+   text-align: center;
+   padding: 5px 3px;
+   background: #FFA929;
+   border-radius: 5px;
+   border: 1px solid #cccccc;
+   float: right;
+   margin-right: 10px;
+}
+
+.redBox{
+   width: 35px;
+   height: 24px;
+   text-shadow: 1px 0px 2px white;
+   text-align: center;
+   padding: 5px 3px;
+   background: #FF2424;
+   border-radius: 5px;
+   border: 1px solid #cccccc;
+   float: right;
+   margin-right: 10px;
+}
+
+.white{
+   width: 35px;
+   height: 24px;
+   text-shadow: 1px 0px 2px white;
+   text-align: center;
+   padding: 5px 3px;
+   background: white;
+   border-radius: 5px;
+   border: 1px solid #cccccc;
+   float: right;
+   margin-right: 10px;
+}
+
+/*
+=RECENT
+*/
+.recent {
+   padding: 15px 0px;
+}
+
+.recent h3 {
+   font-size: 18px;
+}
+
+.recentProject {
+   margin: 15px 0;
+   line-height: 36px;
+}
+
+.recentProject:nth-child(odd) {
+   background: #FAFAFA;
+}
+
+/*
+=REFERENCES
+*/
+.references {
+   border-top: 1px dotted darkblue;
+   border-bottom: 1px dotted darkblue;
+   padding: 15px 0;
+   &> h2 {
+      padding-left: 10px;
+   }
+}
+
+.reference {
+   border-bottom: 1px dotted darkblue;
+   position: relative;
+   padding: 15px 0;
+   &:last-child {
+      border-bottom: none;
+   }
+}
+
+.projectName {
+   padding-left: 3px;
+   float: left;
+}
+
+.who {
+   margin-left: 40px;
+   float: left;
+   &:after {
+      content: "-";
+   }
+}
+
+.miniProfilePic {
+   clear: left;
+   float: left;
+   padding: 25px 0 0 40px;
+   width: 70px;
+}
+
+.rating {
+   float: right;
+   padding-right: 15px;
+}
+
+.starsWrapper {
+   float: right;
+   background: url("../images/design/sprite.png") no-repeat 0 0;
+   height: 18px;
+   width: 90px;
+   margin-top: 2px;
+}
+
+.starsWrapper img {
+   float: left;
+}
+
+.stars {
+   background: url("../images/design/sprite.png") no-repeat 0 -38px;
+}
+
+.comment {
+   width: 600px;
+   -webkit-box-shadow: 1px 1px 3px black;
+   box-shadow: 1px 1px 3px black;
+   border-radius: 5px;
+   margin: 15px 0 0 20px;
+   padding: 25px 15px;
+   float: left;
+   font-style: italic;
+   &:before {
+      content: " ";
+      background: url('../images/design/sprite.png') no-repeat 0 -781px;
+      width: 9px;
+      height: 15px;
+      position: absolute;
+      top: 80px;
+      left: 121px;
+   }
+}
